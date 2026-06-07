@@ -1,10 +1,10 @@
 package org.nira.pollcenter;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -16,5 +16,17 @@ public class PollController {
     @PostMapping
     public Poll createPoll(@RequestBody Poll poll) {
         return pollService.createPoll(poll);
+    }
+
+    @GetMapping
+    public List<Poll> getAllPolls() {
+        return pollService.getPolls();
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Poll> getPollById(@PathVariable Long id) {
+        return pollService.getPoll(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 }
