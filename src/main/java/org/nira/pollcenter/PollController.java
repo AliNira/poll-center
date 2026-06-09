@@ -29,4 +29,9 @@ public class PollController {
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
+
+    @PostMapping("/vote")
+    public void votePoll(@RequestBody Vote vote) {
+        pollService.vote(vote.getPollId(), vote.getOptionIndex());
+    }
 }
