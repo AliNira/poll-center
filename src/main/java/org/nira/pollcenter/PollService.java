@@ -23,4 +23,15 @@ public class PollService {
     public Optional<Poll> getPoll(Long id) {
         return pollRepo.findById(id);
     }
+
+    public void vote(Long pollId, int optionIndex) {
+        Poll poll = pollRepo.findById(pollId).orElseThrow(() -> new RuntimeException("Poll not found"));
+        List<OptionVote> optionVotes = poll.getOptionVotes();
+        if (optionIndex < 0 || optionIndex >= optionVotes.size()) {
+            throw new IllegalArgumentException("Option index out of bounds");
+        }
+        OptionVote optionVote = optionVotes.get(optionIndex);
+        optionVote.setVote(optionVote.getVote() + 1);
+        pollRepo.save(poll);
+    }
 }
