@@ -11,6 +11,14 @@ import {FormsModule} from '@angular/forms';
   styleUrl: './poll.css',
 })
 export class PollComponent implements OnInit{
+  newPoll: Poll = {
+    id: 0,
+    question: '',
+    optionVotes: [
+      {option: '', vote: 0},
+      {option: '', vote: 0}
+    ]
+  }
   polls = signal<Poll[]>([]);
 
   constructor(private pollService: PollService) {}
