@@ -8,6 +8,19 @@
       required
     />
   </div>
+  <div class="options-container mb-3">
+    <div *ngFor="let option of newPoll.optionVotes; let i = index; trackBy: trackByIndex"
+         class="input-group mb-2">
+      <input
+        [(ngModel)]="option.option"
+        placeholder="Option"
+        class="form-control"
+        required
+      />
+    </div>
+  </div>
+  <button (click)="createPoll()" class="btn btn-primary">Create Poll</button>
+
   <h2 class="mt-4 text-center">Available Polls</h2>
   <div class="polls-list">
     <div *ngFor="let poll of polls()" class="border rounded p-3 mb-3">

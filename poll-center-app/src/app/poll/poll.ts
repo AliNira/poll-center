@@ -10,15 +10,14 @@ import {FormsModule} from '@angular/forms';
   templateUrl: './poll.html',
   styleUrl: './poll.css',
 })
-export class PollComponent implements OnInit{
+export class PollComponent implements OnInit {
   newPoll: Poll = {
-    id: 0,
     question: '',
     optionVotes: [
       {option: '', vote: 0},
       {option: '', vote: 0}
     ]
-  }
+  };
   polls = signal<Poll[]>([]);
 
   constructor(private pollService: PollService) {}
@@ -33,8 +32,35 @@ export class PollComponent implements OnInit{
         this.polls.set(data);
       },
       error: (error) => {
-        console.error("Error fetching polls: ", error)
+        console.error("Error fetching polls: ", error);
       }
     });
+  }
+
+  createPoll() {
+    const pollToSend: Poll = {
+      ...this.newPoll,
+      optionVotes: this.newPoll.optionVotes.filter(o => o.option.trim() !== '')
+    };
+
+    this.pollService.createPoll(pollToSend).subscribe({
+      next: (createdPoll) => {
+        this.polls.update(current => [...current, createdPoll]);
+        this.newPoll = {
+          question: '',
+          optionVotes: [
+            {option: '', vote: 0},
+            {option: '', vote: 0}
+          ]
+        };
+      },
+      error: (error) => {
+        console.error("Error creating poll: ", error);
+      }
+    });
+  }
+
+  trackByIndex(index: number): number {
+    return index;
   }
 }

@@ -1,10 +1,10 @@
-export interface OptionVote{
+export interface OptionVote {
   option: string;
   vote: number;
 }
 
 export interface Poll {
-  id: number;
+  id?: number;
   question: string;
   optionVotes: OptionVote[];
 }
