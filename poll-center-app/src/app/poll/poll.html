@@ -1,0 +1,73 @@
+<nav class="pc-nav">
+  <div class="pc-brand">
+    <div class="pc-dot"></div>
+    Poll Center
+  </div>
+  <span class="pc-badge">Live</span>
+</nav>
+
+<div class="pc-wrap">
+
+  <!-- Create Poll -->
+  <p class="pc-section-label">New poll</p>
+  <div class="pc-card">
+    <input
+      [(ngModel)]="newPoll.question"
+      placeholder="Ask a question…"
+      class="pc-input"
+    />
+
+    <div
+      *ngFor="let option of optionVotes(); let i = index; trackBy: trackByIndex"
+      class="pc-option-row"
+    >
+      <input
+        [(ngModel)]="option.option"
+        placeholder="Option {{ i + 1 }}"
+        class="pc-input"
+      />
+      <button
+        *ngIf="optionVotes().length > 2"
+        (click)="removeOption(i)"
+        class="pc-btn-remove"
+      >Remove</button>
+    </div>
+
+    <div class="pc-btn-row">
+      <button (click)="addOption()" class="pc-btn-ghost">+ Add option</button>
+      <button (click)="createPoll()" class="pc-btn-primary">Create poll</button>
+    </div>
+  </div>
+
+  <!-- Poll List -->
+  <div class="pc-polls-section">
+    <p class="pc-section-label">Active polls</p>
+
+    <div *ngFor="let poll of polls()" class="pc-poll-card">
+      <p class="pc-poll-question">{{ poll.question }}</p>
+
+      <div
+        *ngFor="let optVote of poll.optionVotes; let i = index"
+        class="pc-option-vote"
+        (click)="vote(poll.id, i)"
+      >
+        <div
+          class="pc-option-bar"
+          [style.width]="getPercent(poll, optVote.vote) + '%'"
+        ></div>
+        <span class="pc-option-label">{{ optVote.option }}</span>
+        <span class="pc-option-votes">{{ optVote.vote }} votes</span>
+        <span class="pc-option-pct">{{ getPercent(poll, optVote.vote) }}%</span>
+      </div>
+
+      <div class="pc-poll-footer">
+        <span class="pc-total-votes">{{ getTotalVotes(poll) }} total votes</span>
+      </div>
+    </div>
+
+    <p *ngIf="polls().length === 0" style="color: #999; font-size: 13px; text-align: center; padding: 2rem 0;">
+      No polls yet. Create the first one above.
+    </p>
+  </div>
+
+</div>
