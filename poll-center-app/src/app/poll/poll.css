@@ -1,0 +1,240 @@
+:host {
+  display: block;
+}
+
+.pc-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem;
+  height: 56px;
+  background: #ffffff;
+  border-bottom: 0.5px solid rgba(0,0,0,0.1);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.pc-brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 15px;
+  font-weight: 500;
+  color: #1a1a1a;
+}
+
+.pc-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #7F77DD;
+}
+
+.pc-badge {
+  font-size: 11px;
+  color: #534AB7;
+  background: #EEEDFE;
+  padding: 2px 10px;
+  border-radius: 20px;
+  font-weight: 500;
+}
+
+.pc-wrap {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+.pc-section-label {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: #888;
+  margin-bottom: 12px;
+}
+
+.pc-card {
+  background: #ffffff;
+  border: 0.5px solid rgba(0,0,0,0.1);
+  border-radius: 12px;
+  padding: 1.25rem 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.pc-input {
+  width: 100%;
+  height: 36px;
+  border: 0.5px solid rgba(0,0,0,0.2);
+  border-radius: 8px;
+  padding: 0 12px;
+  font-size: 14px;
+  font-family: inherit;
+  outline: none;
+  transition: border-color 0.15s;
+  box-sizing: border-box;
+  margin-bottom: 10px;
+}
+
+.pc-input:focus {
+  border-color: #7F77DD;
+}
+
+.pc-option-row {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.pc-option-row .pc-input {
+  margin-bottom: 0;
+}
+
+.pc-btn-remove {
+  height: 36px;
+  padding: 0 12px;
+  border: 0.5px solid rgba(0,0,0,0.15);
+  border-radius: 8px;
+  font-size: 13px;
+  font-family: inherit;
+  background: transparent;
+  color: #888;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: border-color 0.15s, color 0.15s;
+}
+
+.pc-btn-remove:hover {
+  border-color: #E24B4A;
+  color: #E24B4A;
+}
+
+.pc-btn-row {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+  margin-top: 8px;
+}
+
+.pc-btn-ghost {
+  height: 34px;
+  padding: 0 14px;
+  border: 0.5px solid rgba(0,0,0,0.15);
+  border-radius: 8px;
+  font-size: 13px;
+  font-family: inherit;
+  background: transparent;
+  color: #555;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.pc-btn-ghost:hover {
+  background: #f5f5f5;
+}
+
+.pc-btn-primary {
+  height: 34px;
+  padding: 0 18px;
+  border: none;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  font-family: inherit;
+  background: #7F77DD;
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.pc-btn-primary:hover {
+  background: #6B63CC;
+}
+
+.pc-polls-section {
+  margin-top: 2rem;
+}
+
+.pc-poll-card {
+  background: #ffffff;
+  border: 0.5px solid rgba(0,0,0,0.1);
+  border-radius: 12px;
+  padding: 1.25rem 1.5rem;
+  margin-bottom: 12px;
+}
+
+.pc-poll-question {
+  font-size: 15px;
+  font-weight: 500;
+  margin-bottom: 14px;
+  color: #1a1a1a;
+}
+
+.pc-option-vote {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+  padding: 10px 12px;
+  border: 0.5px solid rgba(0,0,0,0.1);
+  border-radius: 8px;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  transition: border-color 0.15s;
+}
+
+.pc-option-vote:hover {
+  border-color: #AFA9EC;
+}
+
+.pc-option-bar {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  background: #EEEDFE;
+  border-radius: 8px;
+  z-index: 0;
+  transition: width 0.4s ease;
+}
+
+.pc-option-label {
+  position: relative;
+  z-index: 1;
+  font-size: 13px;
+  flex: 1;
+  color: #1a1a1a;
+}
+
+.pc-option-votes {
+  position: relative;
+  z-index: 1;
+  font-size: 12px;
+  color: #534AB7;
+  font-weight: 500;
+}
+
+.pc-option-pct {
+  position: relative;
+  z-index: 1;
+  font-size: 11px;
+  color: #999;
+  min-width: 34px;
+  text-align: right;
+}
+
+.pc-poll-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 0.5px solid rgba(0,0,0,0.08);
+}
+
+.pc-total-votes {
+  font-size: 12px;
+  color: #999;
+}

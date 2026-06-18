@@ -1,37 +1,73 @@
-<div class="container mt-4">
-  <h2 class="text-center">Create Poll</h2>
-  <div class="mb-3">
+<nav class="pc-nav">
+  <div class="pc-brand">
+    <div class="pc-dot"></div>
+    Poll Center
+  </div>
+  <span class="pc-badge">Live</span>
+</nav>
+
+<div class="pc-wrap">
+
+  <!-- Create Poll -->
+  <p class="pc-section-label">New poll</p>
+  <div class="pc-card">
     <input
       [(ngModel)]="newPoll.question"
-      placeholder="Poll Question"
-      class="form-control"
-      required
+      placeholder="Ask a question…"
+      class="pc-input"
     />
-  </div>
-  <div class="options-container mb-3">
-    <div *ngFor="let option of newPoll.optionVotes; let i = index; trackBy: trackByIndex"
-         class="input-group mb-2">
+
+    <div
+      *ngFor="let option of optionVotes(); let i = index; trackBy: trackByIndex"
+      class="pc-option-row"
+    >
       <input
         [(ngModel)]="option.option"
-        placeholder="Option"
-        class="form-control"
-        required
+        placeholder="Option {{ i + 1 }}"
+        class="pc-input"
       />
+      <button
+        *ngIf="optionVotes().length > 2"
+        (click)="removeOption(i)"
+        class="pc-btn-remove"
+      >Remove</button>
+    </div>
+
+    <div class="pc-btn-row">
+      <button (click)="addOption()" class="pc-btn-ghost">+ Add option</button>
+      <button (click)="createPoll()" class="pc-btn-primary">Create poll</button>
     </div>
   </div>
-  <button (click)="createPoll()" class="btn btn-primary">Create Poll</button>
 
-  <h2 class="mt-4 text-center">Available Polls</h2>
-  <div class="polls-list">
-    <div *ngFor="let poll of polls()" class="border rounded p-3 mb-3">
-      <h3>{{ poll.question }}</h3>
-      <div class="option-list">
-        <div *ngFor="let optionVotes of poll.optionVotes; let i = index">
-          <button class="btn btn-outline-primary me-2 mt-2">
-            {{ optionVotes.option }}({{ optionVotes.vote }} votes)
-          </button>
-        </div>
+  <!-- Poll List -->
+  <div class="pc-polls-section">
+    <p class="pc-section-label">Active polls</p>
+
+    <div *ngFor="let poll of polls()" class="pc-poll-card">
+      <p class="pc-poll-question">{{ poll.question }}</p>
+
+      <div
+        *ngFor="let optVote of poll.optionVotes; let i = index"
+        class="pc-option-vote"
+        (click)="vote(poll.id, i)"
+      >
+        <div
+          class="pc-option-bar"
+          [style.width]="getPercent(poll, optVote.vote) + '%'"
+        ></div>
+        <span class="pc-option-label">{{ optVote.option }}</span>
+        <span class="pc-option-votes">{{ optVote.vote }} votes</span>
+        <span class="pc-option-pct">{{ getPercent(poll, optVote.vote) }}%</span>
+      </div>
+
+      <div class="pc-poll-footer">
+        <span class="pc-total-votes">{{ getTotalVotes(poll) }} total votes</span>
       </div>
     </div>
+
+    <p *ngIf="polls().length === 0" style="color: #999; font-size: 13px; text-align: center; padding: 2rem 0;">
+      No polls yet. Create the first one above.
+    </p>
   </div>
+
 </div>
